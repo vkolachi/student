@@ -1,6 +1,9 @@
 package com.example.studentmanagementapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -13,18 +16,24 @@ public class StudentController {
    StudentService studentService;
     @GetMapping("/get")
     public Student getStudent(@RequestParam("q") int regno){
+        System.out.println("service bean is called in contraooler"+studentService);
         return studentService.getStudent(regno);
     }
 
     @PostMapping("/add")
     public String addStudent(@RequestBody Student student){
+        System.out.println("service bean is called in contraooler"+studentService);
        return studentService.addStudent(student);
 
 
     }
     @GetMapping("/getByPath/{id}")
-    public Student getStudentUsingPath(@PathVariable("id") int regno){
-        return studentService.getStudentUsingPath(regno);
+    public ResponseEntity getStudentUsingPath(@PathVariable("id") int regno){
+        Student student=studentService.getStudentUsingPath(regno);
+        if(student==null){
+            return new ResponseEntity("id doesnt exists", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(student,HttpStatus.FOUND);
 
     }
     @PutMapping("/updateage/{id}")

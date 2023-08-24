@@ -9,6 +9,7 @@ public class StudentService {
     StudentRepository studentRepository;
 
     public  String addStudent(Student student) {
+        System.out.println("repo called in service"+studentRepository);
         studentRepository.addStudent(student);
         return "Student added successfully";
 
@@ -17,6 +18,7 @@ public class StudentService {
 
 
     public Student getStudent(int regno) {
+        System.out.println("repo called in service"+studentRepository);
         return studentRepository.getStudent(regno);
     }
 
