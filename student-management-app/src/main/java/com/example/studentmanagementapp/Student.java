@@ -1,9 +1,15 @@
 package com.example.studentmanagementapp;
+
+import org.slf4j.ILoggerFactory;
+import org.slf4j.LoggerFactory;
+
 public class Student {
     private int regno;
     private String name;
     private int age;
     private String course;
+//    private Month monthofbirth=Month.JAN;
+
 
     public Student() {
     }
@@ -45,5 +51,15 @@ public class Student {
 
     public void setCourse(String course) {
         this.course = course;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "regno=" + regno +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", course='" + course + '\'' +
+                '}';
     }
 }
